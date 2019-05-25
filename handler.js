@@ -3,10 +3,11 @@ const { getPage, parsePage, saveRatingsToDB } = require("./utils");
 
 module.exports.polish = (event, context, callback) => {
   // 1. fetch yelp page
-  getPage(event).then(page => console.log(page));
+  getPage(event)
   // 2. parse the page
-
+  .then(page => parsePage(page))
   // 3. save ratings data to our db
+  .then(yelpData => saveRatingsToDB(yelpData));
 
   const response = {
     statusCode: 200,
