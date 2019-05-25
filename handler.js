@@ -7,7 +7,7 @@ module.exports.polish = (event, context, callback) => {
   // 2. parse the page
   .then(page => parsePage(page))
   // 3. save ratings data to our db
-  .then(yelpData => saveRatingsToDB(yelpData));
+  .then(yelpData => saveRatingsToDB(yelpData, event));
 
   const response = {
     statusCode: 200,
