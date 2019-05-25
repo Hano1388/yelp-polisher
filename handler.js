@@ -7,13 +7,14 @@ module.exports.polish = (event, context, callback) => {
   // 2. parse the page
   .then(page => parsePage(page))
   // 3. save ratings data to our db
-  .then(yelpData => saveRatingsToDB(yelpData, event));
-
-  const response = {
+  .then(yelpData => saveRatingsToDB(yelpData, event))
+  .then(() => callback(null, {
     statusCode: 200,
     body: JSON.stringify({
-      message: "Go Serverless v1.0! Your function executed successfully!",
-      input: event
+      message: `Polished ${event}`
     })
-  };
+  }))
+  .catch(err => 
+    callback(new Error(`Error polishing ${event}: ${JSON.stringify(err)}`))
+  );
 };
